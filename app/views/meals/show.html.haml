@@ -1,0 +1,19 @@
+.navbar.navbar-fixed-top
+  .container
+    %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    %a.brand{:href => "#"} Harvard Meals
+    .nav-collapse
+      %ul.nav
+        %li.active{:href => "#"} Home
+        %li{:href => "#"} About
+        %li{:href => "#"} Contact
+
+
+%h1 Meals#show
+%p.test= "hi #{@date}, #{@type}"
+%ul
+  - @meal.dishes.each do |dish|
+    %li.dish= dish.name
