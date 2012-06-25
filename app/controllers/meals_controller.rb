@@ -3,7 +3,7 @@ class MealsController < ApplicationController
 
   def show
     @date = "2011-03-21" || params[:date] || Date.today.to_s
-    @type = "dinner" || params[:type] || current_meal_type
+    @type = "breakfast" || params[:type] || current_meal_type
     @meal = Meal.new(type: @type, date: @date)
     @dishes = @meal.dishes
     @grouped_dishes = @dishes.group_by { |dish| dish.category }
