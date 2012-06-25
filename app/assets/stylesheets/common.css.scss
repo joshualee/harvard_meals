@@ -1,0 +1,65 @@
+.menu {
+
+  &.well {
+    padding: 20px;
+  }
+
+  .menu_header {
+    height: 40px;
+    .nav {
+      float: left;
+      margin: 0;
+    }
+    
+    .today {
+      float: right;
+    }
+  }
+  
+  .dishes {
+    background-color: white;
+    
+    .label {
+      float: right;
+    }
+    
+    thead {
+      color: white;
+      background-color: #3A87AD;
+    }
+    
+    tbody {
+      .label {
+        margin-left: 5px;
+      }
+    }
+    
+  }
+}
+
+.dish_info {
+  .facts {
+  }
+
+  table {
+    background: white;
+    margin-top: 2px;
+    width: 100%;
+    
+    tr {
+      text-align: left;  
+    }
+  }
+}
+
+.well {
+  background: #f1f1f1;
+}
+
+#footer {
+  xborder-top: 1px solid #ddd;
+  xpadding: 5px;
+  margin-bottom: 20px;
+  color: #777;
+  clear: both;
+}

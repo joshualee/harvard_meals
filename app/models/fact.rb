@@ -1,7 +1,7 @@
 class Fact < BaseModel
   attr_accessor :type, :amount, :percent
   
-  def collection_from_json(json)
+  def self.collection_from_json(json)
     collection = []
     JSON.parse(json).each do |fact|
       collection << new(:type => fact["fact"],
@@ -10,4 +10,5 @@ class Fact < BaseModel
                        )
     end
     return collection
+  end
 end

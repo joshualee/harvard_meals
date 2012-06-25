@@ -1,7 +1,7 @@
 class Dish < BaseModel
 
   attr_accessor :category, :recipe, :name, :portion, :unit
-  attr_accessor :ingredients, :vegaterian, :vegan, :local, :organic, :mollie_katzen
+  attr_accessor :ingredients, :vegetarian, :vegan, :local, :organic, :mollie_katzen
 
   def facts 
     uri = URI("#{BASE_URL}/facts?recipe=#{recipe}&portion=#{portion}&output=json")
@@ -32,6 +32,13 @@ class Dish < BaseModel
                        )
     end
     return collection
+  end
+  
+  [:vegetarian, :vegan, :local, :organic, :mollie_katzen].each do |method|
+    define_method(method) do
+      var = instance_variable_get("@#{method}")
+      var && var.downcase != "false"
+    end
   end
   
   private

@@ -1,19 +1,98 @@
 .navbar.navbar-fixed-top
-  .container
-    %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
-      %span.icon-bar
-      %span.icon-bar
-      %span.icon-bar
-    %a.brand{:href => "#"} Harvard Meals
-    .nav-collapse
-      %ul.nav
-        %li.active{:href => "#"} Home
-        %li{:href => "#"} About
-        %li{:href => "#"} Contact
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => "#"} Harvard Meals
+      .nav-collapse
+        %ul.nav
+          %li.active{:href => "#"}
+            %a Home
+          %li
+            %a{:href => "#"} About
+          %li
+            %a{:href => "#"} Contact
 
+#main_content
+  .menu.well.span6
+    %h1 Dining Hall Menu
+    .menu_header
+      %ul.nav.nav-pills
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Week of 6/17 - 6/24
+            %b.caret
+          %ul.dropdown-menu
+            %a Week of 6/17 - 6/24
+            %a Week of 6/25 - 7/1
+            %a Week of 7/2 - 7/8
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Monday
+            %b.caret
+          %ul.dropdown-menu
+            %a Monday
+            %a Tuesday
+            %a Wednesday
+            %a Thursday
+            %a Friday
+            %a Saturday
+            %a Sunday
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Breakfast
+            %b.caret
+          %ul.dropdown-menu
+            %a Breakfast
+            %a Lunch
+            %a Dinner
+      %button.btn.btn-primary.btn-small.today Today
+    
+    .dishes
+      %table.table.table-bordered
+        - @grouped_dishes.each do |category, dishes|
+          %thead
+            %tr
+              %th= category.titleize
+          %tbody
+          - dishes.each do |dish|
+            %tr
+              %td
+                = dish.name
+                -if dish.vegetarian
+                  %span.label.label-success Vegetarian   
+                -if dish.vegan
+                  %span.label.label-success Vegan   
+                -if dish.local
+                  %span.label.label-success Local   
+                -if dish.organic
+                  %span.label.label-warning Organic
+                -if dish.mollie_katzen
+                  %span.label.label-success Mollie Katzen
+  
+  .dish_info.well.span4
+    - @dish = @dishes[1]
+    %h2= @dish.name
+    .ingredients{"title" => "Ingredients", "data-content" => @dish.ingredients}
+      %strong Ingredients
+      %p.muted
+        = abbreviate_ingredients(@dish.ingredients)
+    .facts
+      %strong Nutirional Information
+      %table.table-condensed.table-striped
+        %thead
+          %tr
+            %th Fact
+            %th Amount
+            %th % (DV)
+        %tbody
+          - @dish.facts.each do |fact|
+            %tr
+              %td= fact.type
+              %td= fact.amount
+              %td= fact.percent
 
-%h1 Meals#show
-%p.test= "hi #{@date}, #{@type}"
-%ul
-  - @meal.dishes.each do |dish|
-    %li.dish= dish.name
+#footer.span6
+  Harvard Meals | created by Joshua Lee '14

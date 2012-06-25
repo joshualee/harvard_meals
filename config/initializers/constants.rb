@@ -7,3 +7,12 @@ class BaseModel
     end
   end
 end
+
+def abbreviate_ingredients(str)
+  str = str.split(",").map(&:strip).join(", ").downcase
+  if str.length > 225
+    return str[0, 225] + "..."
+  else
+    return str
+  end
+end
