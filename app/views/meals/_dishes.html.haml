@@ -1,0 +1,34 @@
+.dishes
+  - if @failed_to_load
+    .failed_to_load
+      %p.muted
+        - date_string = @date ? @date.strftime("%A %B %e, %Y") : "an invalid date"
+        = "Oops something went wrong while requesting #{@type} for #{date_string}. Please try again later!"
+  
+  - elsif @no_dishes
+    .no_dishes
+      %p.muted= "There are no dishes for #{@type} on #{@date.strftime("%A %B %e, %Y")}"
+      = link_to "Check dining hall calendar",
+        "http://www.dining.harvard.edu/residential_dining/halls_dates.html"
+        
+  - else
+    %table.table.table-bordered
+      - @grouped_dishes.each do |category, dishes|
+        %thead
+          %tr
+            %th= category.titleize
+
+        - dishes.each do |dish|
+          %tr{:recipe => dish.recipe, :name => dish.name, :portion => dish.portion, :ingredients => dish.ingredients }
+            %td
+              = dish.name
+              -if dish.vegetarian
+                %span.label.label-success Vegetarian   
+              -if dish.vegan
+                %span.label.label-success Vegan   
+              -if dish.local
+                %span.label.label-success Local   
+              -if dish.organic
+                %span.label.label-warning Organic
+              -if dish.mollie_katzen
+                %span.label.label-success Mollie Katzen

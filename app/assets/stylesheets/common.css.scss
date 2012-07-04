@@ -6,18 +6,28 @@
 
   .menu_header {
     height: 40px;
+    margin-left: -10px;
     .nav {
       float: left;
       margin: 0;
     }
     
-    .today {
+    .today, .test {
+      margin-left: 10px;
       float: right;
     }
   }
   
   .dishes {
-    background-color: white;
+    
+    .no_dishes, .failed_to_load {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    table {
+      background-color: white;    
+    }
     
     .label {
       float: right;
@@ -56,9 +66,12 @@
   background: #f1f1f1;
 }
 
+.table-striped tbody tr:nth-child(odd) td {
+  background-color: #ECF5FD;
+}
+
+
 #footer {
-  xborder-top: 1px solid #ddd;
-  xpadding: 5px;
   margin-bottom: 20px;
   color: #777;
   clear: both;

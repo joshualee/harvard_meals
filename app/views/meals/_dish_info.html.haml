@@ -1,0 +1,19 @@
+%h2= dish.name
+.ingredients{"title" => "Ingredients", "data-content" => dish.ingredients}
+  %strong Ingredients
+  %p.muted
+    = abbreviate_ingredients(dish.ingredients)
+.facts
+  %strong Nutritional Information
+  %table.table-condensed.table-striped
+    %thead
+      %tr
+        %th Fact
+        %th Amount
+        %th % (DV)
+    %tbody
+      - dish.facts.each do |fact|
+        %tr
+          %td= fact.type
+          %td= fact.amount
+          %td= fact.percent

@@ -18,81 +18,11 @@
 #main_content
   .menu.well.span6
     %h1 Dining Hall Menu
-    .menu_header
-      %ul.nav.nav-pills
-        %li.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            Week of 6/17 - 6/24
-            %b.caret
-          %ul.dropdown-menu
-            %a Week of 6/17 - 6/24
-            %a Week of 6/25 - 7/1
-            %a Week of 7/2 - 7/8
-        %li.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            Monday
-            %b.caret
-          %ul.dropdown-menu
-            %a Monday
-            %a Tuesday
-            %a Wednesday
-            %a Thursday
-            %a Friday
-            %a Saturday
-            %a Sunday
-        %li.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            Breakfast
-            %b.caret
-          %ul.dropdown-menu
-            %a Breakfast
-            %a Lunch
-            %a Dinner
-      %button.btn.btn-primary.btn-small.today Today
+    = render :partial => "menu_header"
     
-    .dishes
-      %table.table.table-bordered
-        - @grouped_dishes.each do |category, dishes|
-          %thead
-            %tr
-              %th= category.titleize
-          %tbody
-          - dishes.each do |dish|
-            %tr
-              %td
-                = dish.name
-                -if dish.vegetarian
-                  %span.label.label-success Vegetarian   
-                -if dish.vegan
-                  %span.label.label-success Vegan   
-                -if dish.local
-                  %span.label.label-success Local   
-                -if dish.organic
-                  %span.label.label-warning Organic
-                -if dish.mollie_katzen
-                  %span.label.label-success Mollie Katzen
+    = render :partial => "dishes"
   
-  .dish_info.well.span4
-    - @dish = @dishes[1]
-    %h2= @dish.name
-    .ingredients{"title" => "Ingredients", "data-content" => @dish.ingredients}
-      %strong Ingredients
-      %p.muted
-        = abbreviate_ingredients(@dish.ingredients)
-    .facts
-      %strong Nutirional Information
-      %table.table-condensed.table-striped
-        %thead
-          %tr
-            %th Fact
-            %th Amount
-            %th % (DV)
-        %tbody
-          - @dish.facts.each do |fact|
-            %tr
-              %td= fact.type
-              %td= fact.amount
-              %td= fact.percent
-
-#footer.span6
-  Harvard Meals | created by Joshua Lee '14
+  - unless @no_dishes || @failed_to_load
+    .dish_info.well.span4
+      %h2 Dish Details
+      %p.muted Click a dish to see its ingredients and nutritional information.

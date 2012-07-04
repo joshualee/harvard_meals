@@ -1,0 +1,37 @@
+.menu_header
+  %ul.nav.nav-pills
+  
+    %li.dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+        = start_end_week_string(@current_week)
+        %b.caret
+      %ul.dropdown-menu
+        - @weeks.each do |week|
+          = link_to start_end_week_string(week), meal_date_type_path(week, @type)
+          
+    %li.dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+        = @date.strftime("%A")
+        %b.caret
+      %ul.dropdown-menu
+        - day = @current_week
+        - 7.times do
+          = link_to day_to_string(day), meal_date_type_path(day, @type)
+          - day = day.next_day
+        
+    %li.dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+        = @type.titleize
+        %b.caret
+      %ul.dropdown-menu
+        - if @date.sunday?
+          = link_to "Brunch", meal_date_type_path(@date, "brunch")
+        - else
+          = link_to "Breakfast", meal_date_type_path(@date, "breakfast") 
+          = link_to "Lunch", meal_date_type_path(@date, "lunch") 
+        
+        = link_to "Dinner", meal_date_type_path(@date, "dinner") 
+                                      
+  = link_to "Test", meal_date_type_path("2011-03-21", "breakfast"), :class => "btn btn-inverse btn small test" 
+  = link_to "Today", meal_date_path(Date.today.to_s), :class => "btn btn-primary btn small today" 
+  = link_to "Fail", meal_date_path("fake-stuff-lol"), :class => "btn btn-danger btn small fail" 
